@@ -1,0 +1,34 @@
+
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <!-- Jumbotron -->
+    <div class="jumbotron text-center">
+        <div class="container text-center">
+            <div class="panel panel-primary"">
+                <!-- Default panel contents -->
+                <div class="panel-heading">MY WATCHLIST</div>
+                <div class="panel-body">
+                    {% if watchlist %}
+
+                    {% for item in watchlist %}
+              
+                <!-- List group -->
+                <ul class="list-group">
+                  <li class="list-group-item"><strong><a href="{% url 'listing' item.listing.id %}">{{item.listing.Name}}</a></strong></li>
+                  <li class="list-group-item">{{item.listing.user}}</li>
+                  <li class="list-group-item">{{item.listing.description}}</li>
+                  <li class="list-group-item">{{item.listing.category}}</li>
+                  
+                </ul>
+                {% endfor %}
+                </div>
+                {% else %}
+                <h3>No Items in watchlist</h3>
+              </div>
+        
+    {% endif %}
+</div>
+</div>
+</div>
+{% endblock %}
