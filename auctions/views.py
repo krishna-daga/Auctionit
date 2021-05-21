@@ -152,19 +152,12 @@ def closebid(request,id):
         winobj.save()
         message = "Bid Closed"
         msg_type = "success"
-        # deleting from Bid
         bobj.delete()
-    # removing from Comment
     if Comments.objects.filter(listingid=id):
         commentobj = Comments.objects.filter(listingid=id)
         commentobj.delete()
-    
-    # removing from Listing
     listobj.delete()
-    # retrieving the new products list after adding and displaying
-    # list of products available in WinnerModel
     winners = Winner.objects.all()
-    # checking if there are any products
     empty = False
     if len(winners) == 0:
         empty = True
@@ -177,9 +170,7 @@ def closebid(request,id):
 #to see closed listings
 @login_required(login_url='/login')
 def closedlisting(request):
-    # list of products available in WinnerModel
     winners = Winner.objects.all()
-    # checking if there are any products
     empty = False
     if len(winners) == 0:
         empty = True
@@ -214,7 +205,7 @@ def addcomment(request,id):
     return render(request,"auctions/listing.html",{"item":item,"comments":comments,"there":there})
 
 
-def toggle_watchlist(request, id):
+def watchlist(request, id):
     #first returns first object or None
     obj = Listing.objects.filter(id = id).first()
     w = Watchlist.objects.filter(user = request.user, listing = obj).first()
@@ -223,19 +214,18 @@ def toggle_watchlist(request, id):
     #check if item there in watchlist
     #if not there
     if w is None:
-        wl = Watchlist.objects.create(user = request.user,listing = obj)
-        wl.save()
+        w_obj = Watchlist.objects.create(user = request.user,listing = obj)
+        w_obj.save()
         there = Watchlist.objects.filter(user = request.user, listing = obj).first()
         return render(request,"auctions/listing.html",{"item":item,"comments":comments,"there":there})
-    #if there
+    #if there then delete that instance
     w.delete()
     there = Watchlist.objects.filter(user = request.user, listing = obj).first()
     return render(request,"auctions/listing.html",{"item":item,"comments":comments,"there":there})
     
 @login_required
-def watchlist(request):
-    wl = Watchlist.objects.filter(user =request.user)
-    
+def mywatchlist(request):
+    w_obj = Watchlist.objects.filter(user =request.user)
     return render(request, "auctions/watchlist.html", {
-        "watchlist": wl
+        "watchlist": w_obj
     })

@@ -27,6 +27,8 @@
               background-color: #f2f2f2;
               padding: 25px;
             }
+           
+      
         </style>
     </head>
     <body>
@@ -59,7 +61,7 @@
                             {% if user.is_authenticated %}
                   <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ user.username }}</a></li>
                      <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-user"></span>Log Out</a></li>
-                  <li><a href=" {% url 'watchlist' %}"</a><span class="glyphicon glyphicon-shopping-cart"></span> My watchlist</a></li>
+                  <li><a href=" {% url 'mywatchlist' %}"</a><span class="glyphicon glyphicon-shopping-cart"></span> My watchlist</a></li>
                               {% else %}
                                 <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                                    <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
@@ -70,6 +72,9 @@
           </nav>
         {% block body %}
         {% endblock %}
+        <footer>
+          Made by Krishna Daga 
+        </footer>
     </body>
 </html>
 

@@ -13,12 +13,12 @@
 
     <img src="{{item.image_link}}" alt="indeximage" style="height: 350px;" class="embed-responsive"><br><br><br>
     <div style="float: left;">
-        <form action="{% url 'toggle_watchlist' item.id %}" method = "POST">
+        <form action="{% url 'watchlist' item.id %}" method = "POST">
             {% csrf_token %}
             {% if there%}
-            <a href="{% url 'toggle_watchlist' item.id %}" class="btn btn-danger btn-lg" name="remove">Remove from Watchlist</a>
+            <a href="{% url 'watchlist' item.id %}" class="btn btn-danger btn-lg" name="remove">Remove from Watchlist</a>
     {% else %}
-            <a href="{% url 'toggle_watchlist' item.id %}" class="btn btn-success btn-lg" name="addto"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> Add to Watchlist</a>
+            <a href="{% url 'watchlist' item.id %}" class="btn btn-success btn-lg" name="addto"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> Add to Watchlist</a>
     {% endif %}
         </form>
     </div>
